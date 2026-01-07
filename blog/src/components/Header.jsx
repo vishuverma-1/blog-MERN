@@ -60,7 +60,7 @@ const Header = () => {
             ))}
           </ul>
           <button
-            onClick={() => navigate("f/login")}
+            onClick={() => navigate("/login")}
             className="border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
           >
             Sign IN

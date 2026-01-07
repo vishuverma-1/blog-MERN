@@ -4,26 +4,24 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { signup } from "../../services/index/users.js"; 
- 
-const ProfilePage = () => {
+import { signup } from "../../services/index/users.js";
 
-  const {mutate , isLoading} = useMutation({
-    mutationFn:({name , email , password }) =>{
-      return signup({name , email , password});
+const ProfilePage = () => {
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ name, email, password }) => {
+      return signup({ name, email, password });
     },
     onSuccess: (data) => {
-      console.log(data)
+      console.log(data);
     },
-    onError : (error) => { 
+    onError: (error) => {
       toast.error(error.message);
       console.log(error);
     },
   });
 
-
   const {
-    register, 
+    register,
     handleSubmit,
     formState: { errors, isValid },
     watch,
@@ -38,11 +36,11 @@ const ProfilePage = () => {
   });
 
   const submitHandler = (data) => {
-    const {name , email , password } = data; 
-    mutate({name , email , password})
+    const { name, email, password } = data;
+    mutate({ name, email, password });
   };
 
-  const password = watch('password');
+  const password = watch("password");
 
   console.log(errors);
 
@@ -128,14 +126,14 @@ const ProfilePage = () => {
                 type="password"
                 id="password"
                 {...register("password", {
-                    required: {
-                        value: true,
-                        message: "Password is required",
-                    },
-                    minLength:{
-                        value:6,
-                        message: "password length must be at least 6 characters",
-                    },
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "password length must be at least 6 characters",
+                  },
                 })}
                 placeholder="Enter password"
                 className={`placeholder:text-[#959ead] text-sky-950 mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
@@ -159,15 +157,15 @@ const ProfilePage = () => {
                 type="password"
                 id="confirmPassword"
                 {...register("confirmPassword", {
-                    required : { 
-                        value: true,
-                        message: "confirm password is required" 
-                    },
-                    validate : (value) => {
-                        if(value !== password ){
-                            return "passswords do not match";
-                        }
-                    },  
+                  required: {
+                    value: true,
+                    message: "confirm password is required",
+                  },
+                  validate: (value) => {
+                    if (value !== password) {
+                      return "passswords do not match";
+                    }
+                  },
                 })}
                 placeholder="Enter confirm password"
                 className="placeholder:text-[#959ead] text-sky-950 mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border border-[#c3cad9]"
@@ -199,4 +197,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
- 
